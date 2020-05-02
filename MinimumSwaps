@@ -1,0 +1,28 @@
+ public static int MinimumSwaps(int[] arr)
+        {
+            if (arr == null || arr.Length == 0)
+                return 0;
+            int[] sortedArray = arr.ToArray();
+            Array.Sort(sortedArray);
+            int count = 0;           
+           
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var value = sortedArray[i];
+                if (value != arr[i])
+                {
+                    // End array index.
+                    var indexToSwap = Array.IndexOf(arr, value);
+                    int temp = arr[i];
+                    arr[i] = arr[indexToSwap];
+                    arr[indexToSwap] = temp;
+                    count++;
+                }
+
+                // Check if array is completely sorted and no more swap is required.
+                if (sortedArray.SequenceEqual(arr))
+                    break;
+            }
+
+            return count;
+        }
